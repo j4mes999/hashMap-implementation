@@ -1,0 +1,5 @@
+class LinkedList{
+    append(value){
+       
+    }
+}
