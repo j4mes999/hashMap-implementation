@@ -86,6 +86,40 @@ export default class LinkedList {
         return false;
     }
 
+    removeAt(index){
+        let count = 0;
+        let current = this.head;
+        let previous = null;
+        while (current !== null) {
+            if(count === index){
+                previous.setNextNode(current.getNextNode());
+                return current;
+            }
+            count++;
+            previous = current;
+            current = current.getNextNode();
+        }
+        return null;
+    }
+
+    delete(value){
+        let current = this.head;
+        let previous = null;
+        while (current !== null) {
+            if(current.getValue() === value && previous === null){
+                this.head = null;
+                this.tail = null;
+                return current;
+            } else if(current.getValue() === value){
+                previous.setNextNode(current.getNextNode());
+                return current;
+            }
+            previous = current;
+            current = current.getNextNode();
+        }
+        return null;
+    }
+
     toString(){
         let current = this.head;
         let result = '';

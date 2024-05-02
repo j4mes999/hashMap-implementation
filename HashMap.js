@@ -19,13 +19,12 @@ export default class HashMap {
 
   set(key, value) {
     const index = this.hash(key) % this.size;
-    console.log(`HashMap.js - set - index: ${index}`);
     if (!this.map[index]) {
       this.map[index] = new LinkedList();
     }
 
     this.map[index].append({ key, value });
-  
+
   }
 
   get(key) {
@@ -45,4 +44,109 @@ export default class HashMap {
 
     return null;
   }
+
+  has(key) {
+    const index = this.hash(key) % this.size;
+
+    if (!this.map[index]) {
+      return false;
+    }
+
+    let current = this.map[index].head;
+    while (current) {
+      if (current.value.key === key) {
+        return true;
+      }
+      current = current.nextNode;
+    }
+
+    return false;
+  }
+
+  remove(key) {
+    const index = this.hash(key) % this.size;
+
+    if (!this.map[index]) {
+      return false;
+    }
+
+    let current = this.map[index].head;
+    while (current) {
+      if (current.value.key === key) {
+        this.map[index].delete(current.value);
+        return true;
+      }
+      current = current.nextNode;
+    }
+
+    return false;
+  }
+
+  length() {  
+    let count = 0;
+    for (let i = 0; i < this.size; i++) {
+      if (this.map[i]) {
+        let current = this.map[i].head;
+        while (current) {
+          count++;
+          current = current.nextNode;
+        }
+      }
+    }
+
+    return count;
+  }
+
+  clear() {
+    this.map = new Array(this.size);
+  }
+
+  keys() {
+    const keys = [];
+    for (let i = 0; i < this.size; i++) {
+      if (this.map[i]) {
+        let current = this.map[i].head;
+        while (current) {
+          keys.push(current.value.key);
+          current = current.nextNode;
+        }
+      }
+    }
+
+    return keys;
+  }
+
+  values() {
+    const values = [];
+    for (let i = 0; i < this.size; i++) {
+      if (this.map[i]) {
+        let current = this.map[i].head;
+        while (current) {
+          values.push(current.value.value);
+          current = current.nextNode;
+        }
+      }
+    }
+
+    return values;
+  }
+
+  entries() {
+    //TODO improve this method copilot does not know how to handle this
+    const entries = [];
+    for (let i = 0; i < this.size; i++) {
+      if (this.map[i]) {
+        let current = this.map[i].head;
+        while (current) {
+          entries.push(current.getValue());
+          console.log(`HashMap.js current value: ${current.getValue()}`);
+          current = current.nextNode;
+        }
+      }
+    }
+
+    return entries;
+  }
+
+
 }
