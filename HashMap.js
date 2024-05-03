@@ -132,14 +132,12 @@ export default class HashMap {
   }
 
   entries() {
-    //TODO improve this method copilot does not know how to handle this
     const entries = [];
     for (let i = 0; i < this.size; i++) {
       if (this.map[i]) {
         let current = this.map[i].head;
         while (current) {
-          entries.push(current.getValue());
-          console.log(`HashMap.js current value: ${current.getValue()}`);
+          entries.push(current.getValue().value);
           current = current.nextNode;
         }
       }

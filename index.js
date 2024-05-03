@@ -7,5 +7,3 @@ hashMap.set("location", "USA");
 hashMap.set("job", "Software Engineer");
 console.log(`remove: ${hashMap.remove("age")}`);
 console.log(`entries: ${hashMap.entries()}`);
-
-//TODO fix entries method
